@@ -1,0 +1,603 @@
+type: collection.insomnia.rest/5.0
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1741212479314
+  modified: 1741212479314
+collection:
+  - name: Poo
+    meta:
+      id: fld_83ec935846964f0997c51b1e6e024e8e
+      created: 1744910132772
+      modified: 1745257252276
+      sortKey: -1744910132773
+  - name: DesenvWebII
+    meta:
+      id: fld_b300f96edbd74534a9db4ff7fa2d1882
+      created: 1744910353524
+      modified: 1745258435234
+      sortKey: -1744910353524
+    children:
+      - name: Pessoas
+        meta:
+          id: fld_521d5f5d316c4ab7b3c039b7e15d5f41
+          created: 1744920041294
+          modified: 1744920061738
+          sortKey: -1744920059247
+        children:
+          - url: 127.0.0.1:8000/pessoas
+            name: post pessoa
+            meta:
+              id: req_c7a708e147a441fb87635f573fe088b3
+              created: 1744910358513
+              modified: 1744920050224
+              isPrivate: false
+              sortKey: -1744920046387
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"nome" : "Kalyo Airan da silva",
+                	"data_nascimento" : "01/11/2003",
+                	"cpf" : "012.157.159-94",
+                	"telefone_contato" : "(47) 99654-0714"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/pessoas/13
+            name: put pessoa
+            meta:
+              id: req_f1093fc443c34b9fa2b4823c315f6e3c
+              created: 1744917311808
+              modified: 1744920051504
+              isPrivate: false
+              sortKey: -1744920046362
+            method: PUT
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"nome" : "Kalyo Airan da silva",
+                	"data_nascimento" : "01/11/2003",
+                	"cpf" : "012.157.159-94",
+                	"telefone_contato" : "(47) 99654-0714"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/pessoas
+            name: get Pessoas
+            meta:
+              id: req_8b04b4eb7c0a4c5489e397801c31caf4
+              created: 1744917767888
+              modified: 1744920053139
+              isPrivate: false
+              sortKey: -1744920046412
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/pessoas/13
+            name: get {id} Pessoas
+            meta:
+              id: req_4fb924ee56034a168358a0bafc1cd057
+              created: 1744917905450
+              modified: 1745256972329
+              isPrivate: false
+              sortKey: -1744920046437
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/pessoas/14
+            name: delete [id] Pessoas
+            meta:
+              id: req_43f100098ac24da6b2fa81a5041adf6e
+              created: 1744918518258
+              modified: 1744920047953
+              isPrivate: false
+              sortKey: -1744920046337
+            method: DELETE
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Eventos
+        meta:
+          id: fld_bb76dfccdf944b539bb5980e351b698f
+          created: 1744920059147
+          modified: 1745256496342
+          sortKey: -1744920059147
+        children:
+          - url: 127.0.0.1:8000/evento
+            name: get Eventos
+            meta:
+              id: req_6cbfc7ef5cf44a3c852b888e5adb95aa
+              created: 1744920068418
+              modified: 1744920134252
+              isPrivate: false
+              sortKey: -1744920075644
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/evento/1
+            name: get [id] Eventos
+            meta:
+              id: req_88e9508a8af244c4bd1b4c0c71faba2d
+              created: 1744920144960
+              modified: 1744920147899
+              isPrivate: false
+              sortKey: -1744920061040.5
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/evento
+            name: post eventos
+            meta:
+              id: req_fc19a9e3805e436fb1d13d481318d797
+              created: 1744920155124
+              modified: 1744920222685
+              isPrivate: false
+              sortKey: -1744920053738.75
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"userId" : 1,
+                	"data" : "25/05/2025",
+                	"titulo": "evento teste",
+                	"descricao": "Teste de cadastro de eventos"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/evento/2
+            name: put [id] Eventos
+            meta:
+              id: req_129dd2fab57c492d9ee854e79588c0e6
+              created: 1744928135562
+              modified: 1745257225494
+              isPrivate: false
+              sortKey: -1744920053638.75
+            method: PUT
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"userId": 1,
+                	"data": "25/05/2025",
+                	"titulo": "evento teste",
+                	"descricao": "Teste de cadastro de eventos - Atualizado"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/evento/1
+            name: delete [id] Eventos
+            meta:
+              id: req_39409a13fa514df594b322d1b50c545a
+              created: 1744928236501
+              modified: 1744928245811
+              isPrivate: false
+              sortKey: -1744920053538.75
+            method: DELETE
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Evento Pessoas
+        meta:
+          id: fld_6e2e3cb643734e6e9a0429061e9f5878
+          created: 1745257716242
+          modified: 1745258234917
+          sortKey: -1744915206335.5
+        children:
+          - url: 127.0.0.1:8000/evento_pessoas
+            name: get Evento Pessoas
+            meta:
+              id: req_48b2acf0ba8141118d9090fb84e58a09
+              created: 1745257716249
+              modified: 1745257725351
+              isPrivate: false
+              sortKey: -1744920075644
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/evento_pessoas/1
+            name: get [id] Evento Pessoas
+            meta:
+              id: req_b6580565d4ad4940bdb9977c5255e695
+              created: 1745257716253
+              modified: 1745257813701
+              isPrivate: false
+              sortKey: -1744920061040.5
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/evento_pessoas
+            name: post evento Pessoas
+            meta:
+              id: req_517927df08184fe78ae15fd3defada4e
+              created: 1745257716263
+              modified: 1745257854805
+              isPrivate: false
+              sortKey: -1744920053738.75
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"pessoaID" : 13,
+                	"eventoID" : 2
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/evento_pessoas/1
+            name: put [id] Evento Pessoas
+            meta:
+              id: req_a7abd1c79a2d4053a12a9e27eecc39a2
+              created: 1745257716269
+              modified: 1745257907743
+              isPrivate: false
+              sortKey: -1744920053638.75
+            method: PUT
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                 "pessoaID" : 13,
+                	"eventoID" : 2
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/evento_pessoas/1
+            name: delete [id] Evento Pessoas
+            meta:
+              id: req_59ceb1213da043fa98e449b9c53aa0b5
+              created: 1745257716273
+              modified: 1745257924997
+              isPrivate: false
+              sortKey: -1744920053538.75
+            method: DELETE
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Evento Responsavel
+        meta:
+          id: fld_8fbd8f3e145c4d29bcc2a28b96c464e6
+          created: 1745258240833
+          modified: 1745258240833
+          sortKey: -1744912779929.75
+        children:
+          - url: 127.0.0.1:8000/evento_responsavel
+            name: get Evento Responsavel
+            meta:
+              id: req_455eebd2ccff4c259887db89bb1ca827
+              created: 1745258240836
+              modified: 1745258275168
+              isPrivate: false
+              sortKey: -1744920075644
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/evento_responsavel/1
+            name: get [id] evento_responsavel
+            meta:
+              id: req_a321786a93834ea0a379f7e222f2b082
+              created: 1745258240839
+              modified: 1745258290973
+              isPrivate: false
+              sortKey: -1744920061040.5
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/evento_responsavel
+            name: post evento_responsavel
+            meta:
+              id: req_3302a8887b0946bbbd0e14d6c3d5ec9d
+              created: 1745258240842
+              modified: 1745258338104
+              isPrivate: false
+              sortKey: -1744920053738.75
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"userID" : 1,
+                	"eventoID" : 2
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/evento_responsavel/3
+            name: put [id] evento_responsavel
+            meta:
+              id: req_c876c4fce6e246d99be00a0c249c52a3
+              created: 1745258240845
+              modified: 1745258367468
+              isPrivate: false
+              sortKey: -1744920053638.75
+            method: PUT
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                 "userID" : 1,
+                 "eventoID" : 2
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: 127.0.0.1:8000/evento_responsavel/3
+            name: delete [id] evento_responsavel
+            meta:
+              id: req_b040c57fe7e44de597011ec3948ec1c0
+              created: 1745258240849
+              modified: 1745258375941
+              isPrivate: false
+              sortKey: -1744920053538.75
+            method: DELETE
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+  - name: Exercício DesenvWebII
+    meta:
+      id: fld_9b7db8266f6b49caa7b182af25c385df
+      created: 1744928524659
+      modified: 1745256492669
+      sortKey: -1744928524659
+    children:
+      - name: Contatos
+        meta:
+          id: fld_80bebe777e68477f8f4294cc2ee7b759
+          created: 1744933490110
+          modified: 1744933517522
+          sortKey: -1744933515422
+      - name: tipo_contatos
+        meta:
+          id: fld_b945c995cb7d41d790b705a95a2ed69f
+          created: 1744933515322
+          modified: 1744933515322
+          sortKey: -1744933515322
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1741212770411
+    modified: 1745258376883
+  cookies:
+    - key: laravel_session
+      value: eyJpdiI6Ink3REppeERTTTFjMXkrckVzTlB6UWc9PSIsInZhbHVlIjoiRENvL1BDcGdpcUtxM0R0MFd1d0dpeGNsQ0VLV2cxNmsxdzlKMHI5UmJvZVZiRjk1MlBmTTdkTDVjU3ZpM0JtWHJXZ1hINzdQSFdkV3l1UzhjeXZ3OTMxWlNYb3BaOUFCM3UyU3M5QVBhVEJIbFpUbjVYcjhZaFdIcnBsTWtJM04iLCJtYWMiOiJiNDU2ZjRhYWFlN2FjZmU1OTJmY2Y5MWYwMGQxMzE1ZjgyMTdiMmY0YjJjNThjZTg0MDNhZTNkMTNkY2RkYTA5IiwidGFnIjoiIn0%3D
+      maxAge: 7200
+      domain: 127.0.0.1
+      path: /
+      httpOnly: true
+      hostOnly: true
+      creation: 2025-04-17T18:31:27.048Z
+      lastAccessed: 2025-04-21T17:59:36.883Z
+      sameSite: lax
+      id: b7f334bc-efd8-4daa-b023-3a43481904b6
+    - key: XSRF-TOKEN
+      value: eyJpdiI6IlZaZy9wRW5oRm9va0RzMGlRNU9SdkE9PSIsInZhbHVlIjoiVlVwUE9xOTgyakRoVW5XTU1kLzRiWEpjS3JReVNueUJZdUFleVJXanRKaXFISXhFTWJBUFltMkx0aXJSN29rUmJXUlEzRTM3Qzl5ZkdvcTZGdWRjMG0zUkFpUGNkVUpHdlBpYnJRK2Fwa2JBeDJNSng2aGhoQ1ROTHExL2tBTWciLCJtYWMiOiI5NTMxMDIwYmIzNTYyNmUzNGQxNTg3ZGMwZWE3ZWMxZWM0NDgzZTEzZTZjYTI1MjY5ODQ5NWNhMTZkMjAyZDM4IiwidGFnIjoiIn0%3D
+      maxAge: 7200
+      domain: 127.0.0.1
+      path: /
+      hostOnly: true
+      creation: 2025-04-17T19:00:54.409Z
+      lastAccessed: 2025-04-21T17:59:36.883Z
+      sameSite: lax
+      id: 4605910e-cf3d-4da9-87cc-66501c1fe025
+    - key: laravel_session
+      value: eyJpdiI6InE3NWlnYkdPV2tJbFNyV1NvWFgvcHc9PSIsInZhbHVlIjoiNGhNV2JEcGYyY3JzSHdVTVFLSzl2VXRqWTYrV0NON2VtZS9QRUwvTXZlZDZrdGpEYlk2VS8wMWNDQllYY1gzdFZiVVdtRVlsakhYUjdvRk01UHhnWXVmaVRhaHV1SmUrazE2RFlJMHVvZUlSdXVZMThTdERaRVR4RWJobXBlSEsiLCJtYWMiOiJhNzRmNmI1YjVhOTk2NzEwYWU5YzdjNzc4NWY2N2JiYzhiOWNjOGRjNzYzMWE2NGNmY2YwY2UxZDg1YTM1ZjFjIiwidGFnIjoiIn0%3D
+      maxAge: 7200
+      domain: localhost
+      path: /
+      httpOnly: true
+      hostOnly: true
+      creation: 2025-04-17T23:06:21.532Z
+      lastAccessed: 2025-04-18T13:56:59.903Z
+      sameSite: lax
+      id: 7a268b65-1f45-40e4-89f8-9a7df2715054
+    - key: XSRF-TOKEN
+      value: eyJpdiI6IkFjelZ5SGc1NGoybFcvTEs5S01McFE9PSIsInZhbHVlIjoiSmltaWhkMTNldXNVc0Y2V0lhdVFuRWtCMHpuWm9ZZzN0dy9GRTl1akNsMUsrdkJvZUlNNHVvYStTNkVtcndoSmdUdEdnYVh2RlA1dlpibVhOTm0vL0I0MHRsbTEybVk0VlJRc0REN2JXbVdQeXJ6Yy9hamJVbzJkeFN4bjVSYXQiLCJtYWMiOiI4ZTgwYWRkNjM2ODBlNzZmYmUyYzRhYjc0OTAzMjdiNTU3ZmEwNWQwOTNiZDgzYzc5ODE5MjM3MWE0OWIyZTk2IiwidGFnIjoiIn0%3D
+      maxAge: 7200
+      domain: localhost
+      path: /
+      hostOnly: true
+      creation: 2025-04-17T23:08:07.332Z
+      lastAccessed: 2025-04-18T13:56:59.903Z
+      sameSite: lax
+      id: ce5c9db8-826c-4b9d-b24e-1f22ffc7d038
+environments:
+  name: Base Environment
+  meta:
+    id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1741212769839
+    modified: 1741212769839
+    isPrivate: false
