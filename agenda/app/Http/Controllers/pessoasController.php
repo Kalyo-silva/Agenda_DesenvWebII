@@ -14,7 +14,11 @@ class pessoasController extends Controller
             array_push($listaPessoas,$pessoa);
         }
 
-        return $listaPessoas;
+        return view('pessoas.index', compact('listaPessoas'));
+    }
+
+    public function create(){
+        return view('pessoas.create');
     }
 
     public function show(int $id){
@@ -29,6 +33,7 @@ class pessoasController extends Controller
         $pessoa->data_nascimento = $request->input('data_nascimento');
         $pessoa->cpf = $request->input('cpf');
         $pessoa->telefone_contato = $request->input('telefone_contato'); 
+        $pessoa->foto_perfil = $request->input('foto_perfil'); 
 
         $pessoa->save();
 
@@ -41,6 +46,7 @@ class pessoasController extends Controller
         $pessoa->data_nascimento = $request->input('data_nascimento');
         $pessoa->cpf = $request->input('cpf');
         $pessoa->telefone_contato = $request->input('telefone_contato'); 
+        $pessoa->foto_perfil = $request->input('foto_perfil'); 
 
         $pessoa->save();
 
