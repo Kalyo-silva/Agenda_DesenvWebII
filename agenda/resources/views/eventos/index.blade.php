@@ -54,7 +54,7 @@
 
                                 <h3 class='font-bold text-lg text-blue-900'>{{ $evento->titulo }}</h3>
                                 <p class='text-sm text-gray-700 mt-1'>
-                                    {{ \Carbon\Carbon::parse($evento->datahora)->format('d/m/Y H:i') }}
+                                    {{ \Carbon\Carbon::parse($evento->data_ini)->format('d/m/Y H:i') }}
                                 </p>
 
                                 <span
