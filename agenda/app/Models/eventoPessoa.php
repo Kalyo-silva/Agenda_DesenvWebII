@@ -3,21 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\pessoa;
-use App\Models\evento;
 
-class eventoPessoa extends Model
+class EventoPessoa extends Model
 {
+    protected $table = 'evento_pessoas'; // Definindo explicitamente o nome da tabela
+
     protected $fillable = [
-        'pessoaID',
-        'eventoID'
+        'pessoa_id',
+        'evento_id',
+        'tipo_pessoa'
     ];
 
-    public function Pessoa(){
-        return $this->hasOne(pessoa::class, 'id', 'pessoaID');    
+    // Definindo os relacionamentos com os modelos Pessoa e Evento
+    public function pessoa()
+    {
+        return $this->belongsTo(Pessoa::class, 'pessoa_id', 'id');
     }
 
-    public function Evento(){
-        return $this->hasOne(evento::class, 'id', 'eventoID');    
+    public function evento()
+    {
+        return $this->belongsTo(Evento::class, 'evento_id', 'id');
     }
 }

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->timestamp('data_nascimento');
             $table->string('cpf');
             $table->string('telefone_contato');
+            $table->string('foto_perfil')->nullable();;
+            $table->enum('tipo_pessoa', ['Profissional', 'Acolhido'])->default('Profissional');
             $table->timestamps();
         });
     }

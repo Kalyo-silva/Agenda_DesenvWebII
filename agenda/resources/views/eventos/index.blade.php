@@ -2,11 +2,11 @@
     <x-slot name="header">
         <div class='flex items-center'>
             <div class='w-1/4'>
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Pessoas') }}</h2>
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Eventos') }}</h2>
             </div>
             <div class='w-3/4 flex items-center justify-end'>
                 <div class="flex space-x-4">
-                    <button onclick="window.location='{{ route('pessoas.create') }}'"
+                    <button onclick="window.location='{{ route('eventos.create') }}'"
                         class='bg-blue-700 hover:bg-blue-900 px-4 py-2 rounded text-white'>Adicionar</button>
 
                     <button id="btnVisualizar"
@@ -35,26 +35,35 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <h1 class='m-2 font-bold text-lg'>{{ __('Todas as Pessoas Cadastradas') }}</h1>
+
+                    <h1 class='m-2 font-bold text-lg'>{{ __('Todos os Eventos Cadastrados') }}</h1>
 
                     <div class='grid md:grid-cols-3 gap-4'>
-                        @foreach ($listaPessoas as $pessoa)
-                            <div class="pessoa-card border rounded p-4 bg-gray-50 shadow-sm hover:bg-gray-200 cursor-pointer"
-                                onclick="selectPessoa(event, {{ $pessoa->id }}, '{{ route('pessoas.show', $pessoa->id) }}', '{{ route('pessoas.edit', $pessoa->id) }}', '{{ route('pessoas.destroy', $pessoa->id) }}')">
-                                <div class="flex mb-2">
-                                    <div class='w-16 h-16 rounded border mr-2 overflow-hidden'>
-                                        <img class="object-cover w-full h-full"
-                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQADjfoADAlJPrsl_hiiOMeE-FBor-i6hEAVg&s"
-                                            alt="pfp">
-                                    </div>
-                                    <div>
-                                        <h3 class='font-bold'>{{ $pessoa->nome }}</h3>
-                                        <p class='text-sm italic text-gray-700'>
-                                            {{ date('d/m/Y', strtotime($pessoa->data_nascimento)) }}</p>
-                                    </div>
-                                </div>
+                        @foreach ($listaEventos as $evento)
+                            @php
+                                $statusColors = [
+                                    'agendado' => 'bg-blue-100 text-blue-800',
+                                    'pendente' => 'bg-red-100 text-red-800',
+                                    'concluido' => 'bg-green-100 text-green-800',
+                                ];
+                                $statusClass = $statusColors[$evento->status] ?? 'bg-gray-100 text-gray-800';
+                            @endphp
+
+                            <div class="evento-card border rounded p-4 bg-gray-50 shadow-sm hover:bg-gray-200 cursor-pointer"
+                                onclick="selectevento(event, {{ $evento->id }}, '{{ route('eventos.show', $evento->id) }}', '{{ route('eventos.edit', $evento->id) }}', '{{ route('eventos.destroy', $evento->id) }}')">
+
+                                <h3 class='font-bold text-lg text-blue-900'>{{ $evento->titulo }}</h3>
+                                <p class='text-sm text-gray-700 mt-1'>
+                                    {{ \Carbon\Carbon::parse($evento->datahora)->format('d/m/Y H:i') }}
+                                </p>
+
+                                <span
+                                    class="mt-2 inline-block px-3 py-1 text-sm font-semibold rounded {{ $statusClass }}">
+                                    {{ ucfirst($evento->status) }}
+                                </span>
                             </div>
                         @endforeach
+
                     </div>
 
                 </div>
@@ -63,10 +72,10 @@
     </div>
 
     <script>
-        let selectedPessoaId = null;
+        let selectedeventoId = null;
 
-        function selectPessoa(event, id, visualizarRoute, editarRoute, excluirRoute) {
-            selectedPessoaId = id;
+        function selectevento(event, id, visualizarRoute, editarRoute, excluirRoute) {
+            selectedeventoId = id;
 
             const btnVisualizar = document.getElementById('btnVisualizar');
             const btnEditar = document.getElementById('btnEditar');
@@ -82,7 +91,7 @@
             document.getElementById('formExcluir').setAttribute('action', excluirRoute);
 
             // Destaque visual
-            let registros = document.querySelectorAll('.pessoa-card');
+            let registros = document.querySelectorAll('.evento-card');
             registros.forEach(registro => {
                 registro.classList.remove('bg-blue-100', 'border-blue-700', 'shadow-lg');
             });
@@ -98,66 +107,33 @@
                 btn.classList.add('opacity-50', 'pointer-events-none');
                 btn.removeAttribute('onclick');
             });
-            selectedPessoaId = null;
+            selectedeventoId = null;
         }
 
-        function desmarcarPessoa() {
-            let registros = document.querySelectorAll('.pessoa-card');
+        function desmarcarevento() {
+            let registros = document.querySelectorAll('.evento-card');
             registros.forEach(registro => {
                 registro.classList.remove('bg-blue-100', 'border-blue-700', 'shadow-lg');
             });
             resetButtons();
         }
 
-        // Ouvinte para clique fora dos cartões
         document.addEventListener('click', function(event) {
-            const isCard = event.target.closest('.pessoa-card');
+            const isCard = event.target.closest('.evento-card');
             const isButton = event.target.closest('button');
             const isModal = event.target.closest('#confirmacaoExclusao');
 
             if (!isCard && !isButton && !isModal) {
-                desmarcarPessoa();
+                desmarcarevento();
             }
         });
 
-        // Ouvinte para a tecla "Escape"
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
-                desmarcarPessoa();
+                desmarcarevento();
             }
         });
     </script>
 
-
-    <style>
-        .btn-acoes {
-            background-color: #007bff;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            opacity: 0.5;
-        }
-
-        .btn-acoes:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-acoes.disabled {
-            background-color: #d6d6d6;
-            cursor: not-allowed;
-            opacity: 0.3;
-        }
-
-        .border:hover {
-            background-color: #f0f0f0;
-        }
-
-        .border.bg-blue-100 {
-            background-color: #e3f2fd;
-        }
-    </style>
-
-    <x-confirmacao-exclusao /> <!-- Chama o componente de confirmação de exclusão -->
+    <x-confirmacao-exclusao />
 </x-app-layout>

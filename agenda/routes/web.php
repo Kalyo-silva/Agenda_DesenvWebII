@@ -25,12 +25,9 @@ Route::middleware('auth')->group(function () {
 Route::resource("/pessoas", pessoasController::class);
 
 //Rotas Eventos
-Route::resource('/evento', EventoController::class);
+Route::resource('/eventos', EventoController::class);
 
 //Rotas Evento Pessoa
 Route::resource('/evento_pessoas',EventoPessoaController::class);
-
-//Rotas Evento Responsavel
-Route::resource('/evento_responsavel',EventoResponsavelController::class);
 
 require __DIR__.'/auth.php';

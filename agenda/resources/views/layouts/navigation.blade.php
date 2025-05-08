@@ -12,8 +12,18 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('evento_pessoas.index')" :active="request()->routeIs('evento_pessoas.index')">
+                        {{ __('Agenda') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('pessoas.index')" :active="request()->routeIs('pessoas.index')">
                         {{ __('Pessoas') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('eventos.index')" :active="request()->routeIs('eventos.index')">
+                        {{ __('Eventos') }}
                     </x-nav-link>
                 </div>
             </div>
