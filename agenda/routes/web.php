@@ -21,6 +21,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//Rotas Filtro Pessoa
+Route::get('/pessoas/search', [pessoasController::class, 'search'])->name
+('pessoas/search')->middleware(['auth', 'verified']);
+
+//Rotas Filtro Evento
+Route::get('/eventos/search', [EventoController::class, 'search'])->name
+('eventos/search')->middleware(['auth', 'verified']);
+
 //Rotas Pessoas
 Route::resource("/pessoas", pessoasController::class);
 

@@ -36,7 +36,18 @@
                         </div>
                     @endif
 
-                    <h1 class='m-2 font-bold text-lg'>{{ __('Todos os Eventos Cadastrados') }}</h1>
+                    <h1 class='m-2 font-bold text-lg'>{{ __('Cadastros de Eventos') }}</h1>
+
+                    <div class='mb-4'>
+                        <form action="{{ route('eventos/search')}}" method="GET" class="inline">
+                            <input type="text" name="eventoSearch" placeholder="Pesquisar..." class="border rounded px-2 px-1">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-4 rounded">
+                                <img src="" alt="Pesquisar" class="inline w-4 h-4">
+                            </button>
+                        @if($eventoSearch !== null)
+                            <a href="{{ url('eventos')}}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">X</a>
+                        @endif
+                    </div>
 
                     <div class='grid md:grid-cols-3 gap-4'>
                         @foreach ($listaEventos as $evento)
