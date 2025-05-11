@@ -198,8 +198,8 @@ class EventoController extends Controller
         $eventoSearch = $request->input('eventoSearch');
         
         // Pesquisa os eventos na barra de Pesquisa
-        $listaEventos = Evento::where('nome', 'like', '%'. $request->input('eventoSearch') .'%')
-            ->orWhere('cpf', 'like', '%'. $request->input('eventoSearch') .'%')
+        $listaEventos = Evento::where('titulo', 'like', '%'. $request->input('eventoSearch') .'%')
+            ->orWhere('descricao', 'like', '%'. $request->input('eventoSearch') .'%')
             ->get();
         
         // Retorna as views com resultados da Pesquisa

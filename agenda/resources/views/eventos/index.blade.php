@@ -40,12 +40,16 @@
 
                     <div class='mb-4'>
                         <form action="{{ route('eventos/search')}}" method="GET" class="inline">
-                            <input type="text" name="eventoSearch" placeholder="Pesquisar..." class="border rounded px-2 px-1">
-                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-4 rounded">
-                                <img src="" alt="Pesquisar" class="inline w-4 h-4">
+                            <input type="text" name="eventoSearch" placeholder="Pesquisar..." class="border rounded px-2 py-1 text-gray-700" value="{{request('eventoSearch')}}">
+                            <button>
+                                <img src="{{ asset('imagens/lupa_black.png')}}" alt="Pesquisar" class="inline w-4 h-4 hover:w-7 hover:h-7">
                             </button>
                         @if($eventoSearch !== null)
-                            <a href="{{ url('eventos')}}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">X</a>
+                            <a href="{{ url('eventos')}}">
+                                <button>
+                                    <img src="{{ asset('imagens/excluir_red.png')}}" alt="Remover Filtro" class="inline w-6 h-6 hover:w-7 hover:h-7 ">
+                                </button>
+                            </a>
                         @endif
                     </div>
 
