@@ -35,21 +35,56 @@
                 <div class="p-6 text-gray-900">
                     <h1 class='mb-4 font-bold text-lg'>{{ __('Editando: ' . $pessoa->nome) }}</h1>
 
-                    <form id="form-editar" method="POST" action="{{ route('pessoas.update', $pessoa->id) }}">
+                    <form id="form-editar" method="POST" enctype="multipart/form-data" action="{{ route('pessoas.update', $pessoa->id) }}">
                         @csrf
                         @method('PUT')
 
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700">Nome</label>
-                            <input type="text" name="nome" value="{{ old('nome', $pessoa->nome) }}"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
-                        </div>
+                         <div class="flex">
+                            <div class="mb-4">
+                                <label for="foto_perfil" class="block text-sm font-medium text-gray-700">Foto de Perfil 
+                                    @if ($pessoa->foto_perfil != null and file_exists(public_path('pfp').DIRECTORY_SEPARATOR.$pessoa->foto_perfil))
+                                            <div id="Preview" class='w-32 h-32 rounded border mr-2 overflow-hidden hover:brightness-50 hover:cursor-pointer'>
+                                            <img src="{{ asset('pfp/' . $pessoa->foto_perfil) }}" 
+                                                 alt="Foto de Perfil"
+                                                 class="object-cover w-full h-full">
+                                        </div>
+                                    @else
+                                         <div id="Preview" class='w-32 h-32 rounded border mr-2 overflow-hidden hover:brightness-50 hover:cursor-pointer'>
+                                            <img src="{{ asset('img/defaultpfp.png')}}" 
+                                                 alt="Foto de Perfil"
+                                                 class="object-cover w-full h-full">
+                                        </div>
+                                    @endif
+                                </label>
+                                
+                                <input type="file" 
+                                       name="foto_perfil" 
+                                       id="foto_perfil" 
+                                       accept=".jpg, .jpeg, .png" 
+                                       class="mt-1 block absolute w-full border-gray-300 rounded-md shadow-sm opacity-0">
+                            </div>
 
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
-                            <input type="date" name="data_nascimento"
-                                value="{{ old('data_nascimento', \Carbon\Carbon::parse($pessoa->data_nascimento)->format('Y-m-d')) }}"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                            <div class="w-full ml-2">
+                                <div class="mb-4">
+                                    <label for="nome" class="block text-sm font-medium text-gray-700">Nome</label>
+                                    <input type="text" 
+                                           name="nome" 
+                                           id="nome" 
+                                           value="{{ old('nome', $pessoa->nome) }}"
+                                           required 
+                                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="data_nascimento" class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
+                                    <input type="date"
+                                           name="data_nascimento" 
+                                           id="data_nascimento" 
+                                            value="{{ old('data_nascimento', \Carbon\Carbon::parse($pessoa->data_nascimento)->format('Y-m-d')) }}"
+                                           required 
+                                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group mb-4">
@@ -72,19 +107,6 @@
                                 value="{{ old('telefone_contato', $pessoa->telefone_contato) }}"
                                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                         </div>
-
-                        <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-700">Foto de Perfil (caminho)</label>
-                            <input type="text" name="foto_perfil"
-                                value="{{ old('foto_perfil', $pessoa->foto_perfil) }}"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            @if ($pessoa->foto_perfil != null)
-                                <div class="mt-2">
-                                    <img src="{{ asset('storage/' . $pessoa->foto_perfil) }}" alt="Foto de Perfil"
-                                        class="max-w-[150px] rounded">
-                                </div>
-                            @endif
-                        </div>
                     </form>
                 </div>
             </div>
@@ -92,3 +114,32 @@
     </div>
     <x-confirmacao-exclusao />
 </x-app-layout>
+
+
+
+<script>
+    const input = document.getElementById("foto_perfil");
+    const Preview = document.getElementById("Preview");
+
+    input.addEventListener("change", updateImageDisplay);
+
+    function updateImageDisplay(){
+        const curFiles = input.files;
+
+        if (curFiles.length != 0){ 
+            while (Preview.firstChild){
+                Preview.removeChild(Preview.firstChild);
+            }
+                
+
+            for (const file of curFiles) {
+                const image = document.createElement("img");
+                image.src = URL.createObjectURL(file);
+                image.alt = file.name;
+                image.className = "object-cover w-full h-full";
+
+                Preview.appendChild(image);
+            }
+        }
+    }
+</script>

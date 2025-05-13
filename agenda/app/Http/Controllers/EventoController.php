@@ -12,7 +12,7 @@ class EventoController extends Controller
 {
     public function index()
     {
-        $listaEventos = Evento::with('pessoas')->get();
+        $listaEventos = Evento::with('pessoas')->paginate(10);
         return view('eventos.index', compact('listaEventos'));
     }
 

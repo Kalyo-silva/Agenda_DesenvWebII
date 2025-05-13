@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Pessoa;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Dotenv\Store\File\Paths;
 
 class PessoasController extends Controller
 {
     public function index()
     {
-        $listaPessoas = Pessoa::all();
+        $listaPessoas = Pessoa::orderBy('nome', 'asc')->paginate(20);
         return view('pessoas.index', compact('listaPessoas'));
     }
 
@@ -34,6 +35,7 @@ class PessoasController extends Controller
             'cpf' => 'required|string|max:15',
             'telefone_contato' => 'required|string|max:15',
             'tipo_pessoa' => 'required|in:Profissional,Acolhido',
+            'foto_perfil' => 'image|max:2048'
         ]);
 
         if ($validator->fails()) {
@@ -44,12 +46,22 @@ class PessoasController extends Controller
         }
 
         try {
-            $data = $request->all();
+            $pessoa = new Pessoa();
 
-            // Criando a pessoa com a foto (se enviada)
-            Pessoa::create($data);
+            $pessoa->nome = $request->input('nome');
+            $pessoa->data_nascimento = $request->input('data_nascimento');
+            $pessoa->cpf = $request->input('cpf');
+            $pessoa->telefone_contato = $request->input('telefone_contato');
+            $pessoa->tipo_pessoa = $request->input('tipo_pessoa');
+            if ($foto = $request->file('foto_perfil')) {
+                $filename = date('YmdHis').$foto->getClientOriginalName();
+                $foto->move(public_path('pfp'),$filename);
+                $pessoa->foto_perfil = $filename;
+            }    
 
-            return redirect()->route('pessoas.index')->with('success', 'Pessoa cadastrada com sucesso!');
+            if ($pessoa->save()){
+                return redirect()->route('pessoas.index')->with('success', 'Pessoa cadastrada com sucesso!');
+            }            
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Ocorreu um erro ao salvar a pessoa. Tente novamente.');
         }
@@ -69,24 +81,33 @@ class PessoasController extends Controller
     public function update(Request $request, $id)
     {
         $pessoa = Pessoa::findOrFail($id);
-
-        $pessoa->update($request->only([
-            'nome',
-            'data_nascimento',
-            'tipo_pessoa',
-            'cpf',
-            'telefone_contato',
-            'foto_perfil'
-        ]));
-
-        return redirect()->route('pessoas.index')->with('success', 'Pessoa atualizada com sucesso!');
+        
+        $pessoa->nome = $request->input('nome');
+        $pessoa->data_nascimento = $request->input('data_nascimento');
+        $pessoa->cpf = $request->input('cpf');
+        $pessoa->telefone_contato = $request->input('telefone_contato');
+        $pessoa->tipo_pessoa = $request->input('tipo_pessoa');
+        
+        if ($foto = $request->file('foto_perfil')) {
+            $filename = date('YmdHis').$foto->getClientOriginalName();
+            $foto->move(public_path('pfp'),$filename);
+            $pessoa->foto_perfil = $filename;
+        }    
+        
+        if ($pessoa->save()){
+            return redirect()->route('pessoas.index')->with('success', 'Pessoa atualizada com sucesso!');
+        }            
     }
 
     public function destroy(int $id)
     {
         try {
             $pessoa = Pessoa::findOrFail($id);
-            $pessoa->delete();
+            if ($pessoa->delete()){
+                if (file_exists(public_path('pfp').DIRECTORY_SEPARATOR.$pessoa->foto_perfil)) {
+                    unlink(public_path('pfp').DIRECTORY_SEPARATOR.$pessoa->foto_perfil);
+                }
+            };
 
             // Retorna a mensagem de sucesso
             return redirect()->route('pessoas.index')->with('success', 'Pessoa excluída com sucesso!');
