@@ -44,6 +44,7 @@
                             <button>
                                 <img src="{{ asset('imagens/lupa_black.png')}}" alt="Pesquisar" class="inline w-4 h-4 hover:w-7 hover:h-7">
                             </button>
+                        </form>
                         @if($eventoSearch !== null)
                             <a href="{{ url('eventos')}}">
                                 <button>
