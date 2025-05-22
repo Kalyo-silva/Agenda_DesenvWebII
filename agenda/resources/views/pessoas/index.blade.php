@@ -54,6 +54,9 @@
                     </div>
 
                     <div class='grid md:grid-cols-3 gap-4'>
+                        @if($listaPessoas->isEmpty())
+                            <p>Nenhuma pessoa encontrada.</p>
+                        @else
                         @foreach ($listaPessoas as $pessoa)
                             <div class="pessoa-card border rounded p-4 bg-gray-50 shadow-sm hover:bg-gray-200 cursor-pointer"
                                 onclick="selectPessoa(event, {{ $pessoa->id }}, '{{ route('pessoas.show', $pessoa->id) }}', '{{ route('pessoas.edit', $pessoa->id) }}', '{{ route('pessoas.destroy', $pessoa->id) }}')">
@@ -71,6 +74,7 @@
                                 </div>
                             </div>
                         @endforeach
+                        @endif
                     </div>
 
                 </div>

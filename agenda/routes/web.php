@@ -22,20 +22,23 @@ Route::middleware('auth')->group(function () {
 });
 
 //Rotas Filtro Pessoa
-Route::get('/pessoas/search', [pessoasController::class, 'search'])->name
-('pessoas/search')->middleware(['auth', 'verified']);
+Route::get('/pessoas/search', [pessoasController::class, 'search'])
+    ->name('pessoas/search')->middleware(['auth', 'verified']);
 
 //Rotas Filtro Evento
-Route::get('/eventos/search', [EventoController::class, 'search'])->name
-('eventos/search')->middleware(['auth', 'verified']);
+Route::get('/eventos/search', [EventoController::class, 'search'])
+    ->name('eventos/search')->middleware(['auth', 'verified']);
 
 //Rotas Pessoas
-Route::resource("/pessoas", pessoasController::class);
+Route::resource("/pessoas", pessoasController::class)
+    ->names('pessoas')->middleware(['auth', 'verified']);
 
 //Rotas Eventos
-Route::resource('/eventos', EventoController::class);
+Route::resource('/eventos', EventoController::class)
+    ->names('eventos')->middleware(['auth', 'verified']);
 
 //Rotas Evento Pessoa
-Route::resource('/evento_pessoas',EventoPessoaController::class);
+Route::resource('/evento_pessoas',EventoPessoaController::class)
+    ->names('evento_pessoas')->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

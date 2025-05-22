@@ -55,6 +55,9 @@
                     </div>
 
                     <div class='grid md:grid-cols-3 gap-4'>
+                        @if($listaEventos->isEmpty())
+                            <p>Nenhum evento encontrado.</p>
+                        @else
                         @foreach ($listaEventos as $evento)
                             @php
                                 $statusColors = [
@@ -79,7 +82,7 @@
                                 </span>
                             </div>
                         @endforeach
-
+                        @endif
                     </div>
 
                 </div>
