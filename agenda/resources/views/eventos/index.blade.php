@@ -39,49 +39,51 @@
                     <h1 class='m-2 font-bold text-lg'>{{ __('Cadastros de Eventos') }}</h1>
 
                     <div class='mb-4'>
-                        <form action="{{ route('eventos/search')}}" method="GET" class="inline">
-                            <input type="text" name="eventoSearch" placeholder="Pesquisar..." class="border rounded px-2 py-1 text-gray-700" value="{{request('eventoSearch')}}">
-                            <button>
-                                <img src="{{ asset('imagens/lupa_black.png')}}" alt="Pesquisar" class="inline w-4 h-4 hover:w-7 hover:h-7">
+                        <form action="{{ route('eventos/search') }}" method="GET"
+                            class="flex items-center w-full max-w-md space-x-2">
+                            <input type="text" name="eventoSearch" placeholder="Pesquisar..."
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-indigo-200"
+                                value="{{ request('eventoSearch') }}">
+                            <button type="submit"
+                                class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                                Buscar
                             </button>
+
+                            @if (!empty($eventoSearch))
+                                <a href="{{ url('eventos') }}"
+                                    class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">X</a>
+                            @endif
                         </form>
-                        @if($eventoSearch !== null)
-                            <a href="{{ url('eventos')}}">
-                                <button>
-                                    <img src="{{ asset('imagens/excluir_red.png')}}" alt="Remover Filtro" class="inline w-6 h-6 hover:w-7 hover:h-7 ">
-                                </button>
-                            </a>
-                        @endif
                     </div>
 
                     <div class='grid md:grid-cols-3 gap-4'>
-                        @if($listaEventos->isEmpty())
+                        @if ($listaEventos->isEmpty())
                             <p>Nenhum evento encontrado.</p>
                         @else
-                        @foreach ($listaEventos as $evento)
-                            @php
-                                $statusColors = [
-                                    'agendado' => 'bg-blue-100 text-blue-800',
-                                    'pendente' => 'bg-red-100 text-red-800',
-                                    'concluido' => 'bg-green-100 text-green-800',
-                                ];
-                                $statusClass = $statusColors[$evento->status] ?? 'bg-gray-100 text-gray-800';
-                            @endphp
+                            @foreach ($listaEventos as $evento)
+                                @php
+                                    $statusColors = [
+                                        'agendado' => 'bg-blue-100 text-blue-800',
+                                        'pendente' => 'bg-red-100 text-red-800',
+                                        'concluido' => 'bg-green-100 text-green-800',
+                                    ];
+                                    $statusClass = $statusColors[$evento->status] ?? 'bg-gray-100 text-gray-800';
+                                @endphp
 
-                            <div class="evento-card border rounded p-4 bg-gray-50 shadow-sm hover:bg-gray-200 cursor-pointer"
-                                onclick="selectevento(event, {{ $evento->id }}, '{{ route('eventos.show', $evento->id) }}', '{{ route('eventos.edit', $evento->id) }}', '{{ route('eventos.destroy', $evento->id) }}')">
+                                <div class="evento-card border rounded p-4 bg-gray-50 shadow-sm hover:bg-gray-200 cursor-pointer"
+                                    onclick="selectevento(event, {{ $evento->id }}, '{{ route('eventos.show', $evento->id) }}', '{{ route('eventos.edit', $evento->id) }}', '{{ route('eventos.destroy', $evento->id) }}')">
 
-                                <h3 class='font-bold text-lg text-blue-900'>{{ $evento->titulo }}</h3>
-                                <p class='text-sm text-gray-700 mt-1'>
-                                    {{ \Carbon\Carbon::parse($evento->datahora)->format('d/m/Y H:i') }}
-                                </p>
+                                    <h3 class='font-bold text-lg text-blue-900'>{{ $evento->titulo }}</h3>
+                                    <p class='text-sm text-gray-700 mt-1'>
+                                        {{ \Carbon\Carbon::parse($evento->datahora)->format('d/m/Y H:i') }}
+                                    </p>
 
-                                <span
-                                    class="mt-2 inline-block px-3 py-1 text-sm font-semibold rounded {{ $statusClass }}">
-                                    {{ ucfirst($evento->status) }}
-                                </span>
-                            </div>
-                        @endforeach
+                                    <span
+                                        class="mt-2 inline-block px-3 py-1 text-sm font-semibold rounded {{ $statusClass }}">
+                                        {{ ucfirst($evento->status) }}
+                                    </span>
+                                </div>
+                            @endforeach
                         @endif
                     </div>
 

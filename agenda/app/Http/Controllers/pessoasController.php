@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pessoa;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 
 class PessoasController extends Controller
 {
@@ -105,8 +106,8 @@ class PessoasController extends Controller
         $pessoaSearch = $request->input('pessoaSearch');
         
         // Pesquisa as pessoas na barra de Pesquisa
-        $listaPessoas = Pessoa::where('nome', 'like', '%'. $request->input('pessoaSearch') .'%')
-            ->orWhere('cpf', 'like', '%'. $request->input('pessoaSearch') .'%')
+        $listaPessoas = Pessoa::where(DB::raw('LOWER(nome)'), 'like', '%'. strtolower($pessoaSearch) .'%')
+            ->orWhere('cpf', 'like', '%'. strtolower($pessoaSearch) .'%')
             ->get();
         
         // Retorna as views com resultados da Pesquisa
