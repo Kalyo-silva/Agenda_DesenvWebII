@@ -86,9 +86,9 @@
                                             {{$pessoa->tipo_pessoa }}</p>
                                     </div>
                                 </div>
+                            </div>
                           @endforeach
                         @endif
-                    </div>
                     <div class="mt-4">
                         {{$listaPessoas->links()}}
                     </div>

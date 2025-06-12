@@ -13,7 +13,7 @@ class PessoasController extends Controller
 {
     public function index()
     {
-        $listaPessoas = Pessoa::all();
+        $listaPessoas = Pessoa::orderBy('nome', 'asc')->paginate(20);
         $pessoaSearch = null;
         return view('pessoas.index', compact('listaPessoas', 'pessoaSearch'));
     }
@@ -129,7 +129,7 @@ class PessoasController extends Controller
         // Pesquisa as pessoas na barra de Pesquisa
         $listaPessoas = Pessoa::where(DB::raw('LOWER(nome)'), 'like', '%'. strtolower($pessoaSearch) .'%')
             ->orWhere('cpf', 'like', '%'. strtolower($pessoaSearch) .'%')
-            ->get();
+            ->paginate(20);
         
         // Retorna as views com resultados da Pesquisa
         return view('pessoas.index', compact('listaPessoas', 'pessoaSearch'));

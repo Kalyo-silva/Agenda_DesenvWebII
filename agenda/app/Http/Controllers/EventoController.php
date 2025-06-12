@@ -12,7 +12,7 @@ class EventoController extends Controller
 {
     public function index()
     {
-        $listaEventos = Evento::with('pessoas')->get();
+        $listaEventos = Evento::with('pessoas')->paginate(10);
         $eventoSearch = null;
         return view('eventos.index', compact('listaEventos', 'eventoSearch'));
     }
@@ -200,7 +200,7 @@ class EventoController extends Controller
         // Pesquisa os eventos na barra de Pesquisa
         $listaEventos = Evento::where(DB::raw('LOWER(titulo)'), 'like', '%'. strtolower($eventoSearch) .'%')
             ->orWhere(DB::raw('LOWER(descricao)'), 'like', '%'. strtolower($eventoSearch) .'%')
-            ->get();
+            ->paginate(10);
         
         // Retorna as views com resultados da Pesquisa
         return view('eventos.index', compact('listaEventos', 'eventoSearch'));
