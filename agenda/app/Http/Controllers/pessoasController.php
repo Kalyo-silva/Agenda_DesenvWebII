@@ -6,14 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Pessoa;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 use Dotenv\Store\File\Paths;
 
 class PessoasController extends Controller
 {
     public function index()
     {
-        $listaPessoas = Pessoa::orderBy('nome', 'asc')->paginate(20);
-        return view('pessoas.index', compact('listaPessoas'));
+        $listaPessoas = Pessoa::all();
+        $pessoaSearch = null;
+        return view('pessoas.index', compact('listaPessoas', 'pessoaSearch'));
     }
 
     public function create()
@@ -118,5 +120,18 @@ class PessoasController extends Controller
             // Retorna a mensagem de erro caso ocorra algum outro erro
             return redirect()->route('pessoas.index')->with('error', 'Ocorreu um erro ao excluir a pessoa. Tente novamente.');
         }
+    }
+
+    public function search(Request $request)
+    {
+        $pessoaSearch = $request->input('pessoaSearch');
+        
+        // Pesquisa as pessoas na barra de Pesquisa
+        $listaPessoas = Pessoa::where(DB::raw('LOWER(nome)'), 'like', '%'. strtolower($pessoaSearch) .'%')
+            ->orWhere('cpf', 'like', '%'. strtolower($pessoaSearch) .'%')
+            ->get();
+        
+        // Retorna as views com resultados da Pesquisa
+        return view('pessoas.index', compact('listaPessoas', 'pessoaSearch'));
     }
 }

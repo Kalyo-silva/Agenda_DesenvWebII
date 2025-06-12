@@ -12,8 +12,9 @@ class EventoController extends Controller
 {
     public function index()
     {
-        $listaEventos = Evento::with('pessoas')->paginate(10);
-        return view('eventos.index', compact('listaEventos'));
+        $listaEventos = Evento::with('pessoas')->get();
+        $eventoSearch = null;
+        return view('eventos.index', compact('listaEventos', 'eventoSearch'));
     }
 
     public function create()
@@ -190,5 +191,18 @@ class EventoController extends Controller
             DB::rollBack();
             return back()->withErrors(['error' => 'Erro ao excluir o evento: ' . $e->getMessage()]);
         }
+    }
+
+    public function search(Request $request)
+    {
+        $eventoSearch = $request->input('eventoSearch');
+        
+        // Pesquisa os eventos na barra de Pesquisa
+        $listaEventos = Evento::where(DB::raw('LOWER(titulo)'), 'like', '%'. strtolower($eventoSearch) .'%')
+            ->orWhere(DB::raw('LOWER(descricao)'), 'like', '%'. strtolower($eventoSearch) .'%')
+            ->get();
+        
+        // Retorna as views com resultados da Pesquisa
+        return view('eventos.index', compact('listaEventos', 'eventoSearch'));
     }
 }
