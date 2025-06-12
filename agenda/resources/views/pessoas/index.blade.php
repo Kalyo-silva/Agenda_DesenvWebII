@@ -60,26 +60,38 @@
                         @if ($listaPessoas->isEmpty())
                             <p>Nenhuma pessoa encontrada.</p>
                         @else
-                            @foreach ($listaPessoas as $pessoa)
-                                <div class="pessoa-card border rounded p-4 bg-gray-50 shadow-sm hover:bg-gray-200 cursor-pointer"
-                                    onclick="selectPessoa(event, {{ $pessoa->id }}, '{{ route('pessoas.show', $pessoa->id) }}', '{{ route('pessoas.edit', $pessoa->id) }}', '{{ route('pessoas.destroy', $pessoa->id) }}')">
-                                    <div class="flex mb-2">
-                                        <div class='w-16 h-16 rounded border mr-2 overflow-hidden'>
-                                            <img class="object-cover w-full h-full"
-                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQADjfoADAlJPrsl_hiiOMeE-FBor-i6hEAVg&s"
-                                                alt="pfp">
-                                        </div>
-                                        <div>
-                                            <h3 class='font-bold'>{{ $pessoa->nome }}</h3>
-                                            <p class='text-sm italic text-gray-700'>
-                                                {{ date('d/m/Y', strtotime($pessoa->data_nascimento)) }}</p>
-                                        </div>
+                          @foreach ($listaPessoas as $pessoa)
+                            <div class="pessoa-card border rounded p-4 bg-gray-50 shadow-sm hover:bg-gray-200 cursor-pointer"
+                                onclick="selectPessoa(event, {{ $pessoa->id }}, '{{ route('pessoas.show', $pessoa->id) }}', '{{ route('pessoas.edit', $pessoa->id) }}', '{{ route('pessoas.destroy', $pessoa->id) }}')">
+                                <div class="flex mb-2">
+
+                                    <div class='w-16 h-16 rounded border mr-2 overflow-hidden'>
+                                        @if ($pessoa->foto_perfil != null and file_exists(public_path('pfp').DIRECTORY_SEPARATOR.$pessoa->foto_perfil))
+                                            <img src="{{ asset('pfp/' . $pessoa->foto_perfil) }}" 
+                                                 alt="Foto de Perfil"
+                                                 class="object-cover w-full h-full">
+
+                                        @else
+                                                <img src="{{ asset('img/defaultpfp.png')}}" 
+                                                    alt="Foto de Perfil"
+                                                    class="object-cover w-full h-full">
+
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <h3 class='font-bold'>{{ $pessoa->nome }}</h3>
+                                        <p class='text-sm italic text-gray-700'>
+                                            {{ date('d/m/Y', strtotime($pessoa->data_nascimento)) }}</p>
+                                        <p class='text-sm italic text-gray-700'>
+                                            {{$pessoa->tipo_pessoa }}</p>
                                     </div>
                                 </div>
-                            @endforeach
+                          @endforeach
                         @endif
                     </div>
-
+                    <div class="mt-4">
+                        {{$listaPessoas->links()}}
+                    </div>
                 </div>
             </div>
         </div>
