@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Evento;
 
 class Pessoa extends Model
 {
@@ -13,16 +15,23 @@ class Pessoa extends Model
         'cpf',
         'telefone_contato',
         'foto_perfil',
+        'usuario_id', // <- adicionado
     ];
 
     /**
-     * Relacionamento: Pessoa tem muitos Eventos
-     * A tabela intermediária é 'evento_pessoa' e as colunas de relacionamento são
-     * 'evento_id' e 'pessoa_id'
+     * Relacionamento: Pessoa pertence a um Usuário
+     */
+    public function usuario()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Relacionamento: Pessoa participa de muitos Eventos
      */
     public function eventos()
     {
-        return $this->hasManyToMany(Evento::class, 'evento_pessoas')
-            ->withPivot('tipo_pessoa');
+        return $this->belongsToMany(Evento::class, 'evento_pessoas')
+                    ->withPivot('tipo_pessoa');
     }
 }

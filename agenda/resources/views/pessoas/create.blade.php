@@ -25,19 +25,19 @@
                         @csrf
                         <div class="flex">
                             <div class="mb-4">
-                                <label for="foto_perfil" class="block text-sm font-medium text-gray-700">Foto de Perfil 
+                                <label for="foto_perfil" class="block text-sm font-medium text-gray-700">Foto de Perfil
                                     <div id="Preview" class='w-32 h-32 rounded border mr-2 overflow-hidden hover:brightness-50 hover:cursor-pointer'>
                                         <img class="object-cover w-full h-full"
-                                             src="{{asset('img/defaultpfp.png')}}"
-                                             alt="pfp">
-                                     </div>
+                                            src="{{asset('img/defaultpfp.png')}}"
+                                            alt="pfp">
+                                    </div>
                                 </label>
-                                
-                                <input type="file" 
-                                       name="foto_perfil" 
-                                       id="foto_perfil" 
-                                       accept=".jpg, .jpeg, .png" 
-                                       class="mt-1 block absolute w-full border-gray-300 rounded-md shadow-sm opacity-0">
+
+                                <input type="file"
+                                    name="foto_perfil"
+                                    id="foto_perfil"
+                                    accept=".jpg, .jpeg, .png"
+                                    class="mt-1 block absolute w-full border-gray-300 rounded-md shadow-sm opacity-0">
                             </div>
 
                             <div class="w-full ml-2">
@@ -52,7 +52,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-group mb-4">
                             <label for="tipo_pessoa" class="block text-sm font-medium text-gray-700">Tipo</label>
                             <select class="form-control mt-1 block w-full border-gray-300 rounded-md shadow-sm" name="tipo_pessoa" id="tipo_pessoa" required>
@@ -70,6 +70,17 @@
                             <label for="telefone_contato" class="block text-sm font-medium text-gray-700">Telefone de Contato</label>
                             <input type="text" name="telefone_contato" id="telefone_contato" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="(xx) xxxx-xxxx">
                         </div>
+
+                        <div class="mb-4">
+                            <label for="usuario_id" class="block text-sm font-medium text-gray-700">Usuário Vinculado</label>
+                            <select name="usuario_id" id="usuario_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                <option value="">-- Selecione um usuário --</option>
+                                @foreach ($usuarios as $usuario)
+                                <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -84,14 +95,14 @@
 
     input.addEventListener("change", updateImageDisplay);
 
-    function updateImageDisplay(){        
+    function updateImageDisplay() {
         const curFiles = input.files;
 
-        if (curFiles.length != 0){ 
-            while (Preview.firstChild){
+        if (curFiles.length != 0) {
+            while (Preview.firstChild) {
                 Preview.removeChild(Preview.firstChild);
             }
-                
+
 
             for (const file of curFiles) {
                 const image = document.createElement("img");
