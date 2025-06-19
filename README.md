@@ -11,4 +11,4 @@ Trabalho Realizado na matéria de Desenvolvimento Web II
 5. 👽 copy .env.example .env
 6. 👽 alterar as configurações do .env
 7. 👽 php artisan key:generate
-8. 👽 php artisan migrate:fresh
+8. 👽 php artisan migrate
