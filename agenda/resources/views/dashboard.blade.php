@@ -154,13 +154,22 @@
                                 $inicio->hour < 18 => '#3b82f6',
                                 default => '#1e40af',
                             };
+
+                            if($evento->status == 'concluido'){
+                                $corFundo = '#166534';
+                            }
+                            else if ($evento->status == 'pendente'){
+                                $corFundo = '#991b1b';
+                            }
                         @endphp
 
-                        <div class="event"
-                             title="{{ $evento->titulo }} ({{ $inicio->format('H:i') }} - {{ $fim->format('H:i') }})"
-                             style="top: {{ $offsetPx }}px; height: {{ $altura }}px; background-color: {{ $corFundo }};">
-                            {{ $inicio->format('H:i') }} - {{ $evento->titulo }}
-                        </div>
+                        <a href="{{route('eventos.show', $evento->id)}}">
+                            <div class="event"
+                                title="{{ $evento->titulo }} ({{ $inicio->format('H:i') }} - {{ $fim->format('H:i') }})"
+                                style="top: {{ $offsetPx }}px; height: {{ $altura }}px; background-color: {{ $corFundo }};">
+                                {{ $inicio->format('H:i') }} - {{ $evento->titulo }}
+                            </div>
+                        </a>
                     @endforeach
                 </div>
             @endforeach

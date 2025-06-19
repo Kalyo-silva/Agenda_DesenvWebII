@@ -104,13 +104,24 @@
 
                     @foreach ($eventos as $evento)
                         @php
+                            $corFundo = '#3b82f6';
+
+                            if($evento->status == 'concluido'){
+                                $corFundo = '#166534';
+                            }
+                            else if ($evento->status == 'pendente'){
+                                $corFundo = '#991b1b';
+                            }
+
                             $dataIni = \Carbon\Carbon::parse($evento->data_ini)->startOfDay();
                             $dataFim = \Carbon\Carbon::parse($evento->data_fim)->endOfDay();
                         @endphp
                         @if ($dia->between($dataIni, $dataFim))
-                            <div class="event-title" title="{{ $evento->titulo }} ({{ $dataIni->format('d/m H:i') }} - {{ $dataFim->format('d/m H:i') }})">
-                                {{ $evento->titulo }}
-                            </div>
+                            <a href="{{route('eventos.show', $evento->id)}}">
+                                <div class="event-title" style="background-color: {{$corFundo}}" title="{{ $evento->titulo }} ({{ $evento->data_ini->format('d/m H:i') }} - {{ $evento->data_fim->format('d/m H:i') }})">
+                                    {{ $evento->titulo }}
+                                </div>
+                            </a>
                         @endif
                     @endforeach
                 </div>
