@@ -37,12 +37,12 @@
 
                     <div class="mb-4">
                         <h3 class="text-lg font-semibold text-gray-800">Data e Hora de Início:</h3>
-                        <p class="text-gray-700">{{ \Carbon\Carbon::parse($evento->datahora)->format('d/m/Y H:i') }}</p>
+                        <p class="text-gray-700">{{ \Carbon\Carbon::parse($evento->data_ini)->format('d/m/Y H:i') }}</p>
                     </div>
 
                     <div class="mb-4">
                         <h3 class="text-lg font-semibold text-gray-800">Data e Hora Final Estimada:</h3>
-                        <p class="text-gray-700">{{ \Carbon\Carbon::parse($evento->datahora_final)->format('d/m/Y H:i') }}</p>
+                        <p class="text-gray-700">{{ \Carbon\Carbon::parse($evento->data_fim)->format('d/m/Y H:i') }}</p>
                     </div>
 
                     <div class="mb-4">

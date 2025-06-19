@@ -33,7 +33,7 @@ class Evento extends Model
      */
     public function pessoas()
     {
-        return $this->BelongsToMany(Pessoa::class, 'evento_pessoas')->withPivot('tipo_pessoa');
+        return $this->belongsToMany(\App\Models\Pessoa::class, 'evento_pessoas', 'evento_id', 'pessoa_id');
     }
 
     protected $casts = [
@@ -42,13 +42,12 @@ class Evento extends Model
     ];
 
     public function profissionais()
-{
-    return $this->pessoas()->wherePivot('tipo_pessoa', 'Profissional');
-}
+    {
+        return $this->pessoas()->wherePivot('tipo_pessoa', 'Profissional');
+    }
 
-public function acolhidos()
-{
-    return $this->pessoas()->wherePivot('tipo_pessoa', 'Acolhido');
-}
-
+    public function acolhidos()
+    {
+        return $this->pessoas()->wherePivot('tipo_pessoa', 'Acolhido');
+    }
 }

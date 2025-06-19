@@ -3,17 +3,20 @@
 use App\Http\Controllers\pessoasController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\EventoPessoaController;
-use App\Http\Controllers\EventoResponsavelController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AgendaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/agenda', [AgendaController::class, 'index'])
+    ->middleware(['auth', 'verified'])->name('agenda.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

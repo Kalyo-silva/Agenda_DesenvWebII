@@ -31,39 +31,39 @@
                     <h1 class='mb-4 font-bold text-lg'>{{ __('Detalhes de: ' . $pessoa->nome) }}</h1>
 
                     <div class="flex">
+                        <div class="mb-4">
+                            <label for="foto_perfil" class="block text-sm font-medium text-gray-700">Foto de Perfil</label>
+                            @if ($pessoa->foto_perfil != null and file_exists(public_path('pfp').DIRECTORY_SEPARATOR.$pessoa->foto_perfil))
+                            <div id="Preview" class='w-24 h-24 rounded border mr-2 overflow-hidden'>
+                                <img src="{{ asset('pfp/' . $pessoa->foto_perfil) }}"
+                                    alt="Foto de Perfil"
+                                    class="object-cover w-full h-full">
+                            </div>
+                            @else
+                            <div id="Preview" class='w-24 h-24 rounded border mr-2 overflow-hidden'>
+                                <img src="{{ asset('img/defaultpfp.png')}}"
+                                    alt="Foto de Perfil"
+                                    class="object-cover w-full h-full">
+                            </div>
+                            @endif
+                        </div>
+
+                        <div class="w-full ml-2">
                             <div class="mb-4">
-                                <label for="foto_perfil" class="block text-sm font-medium text-gray-700">Foto de Perfil</label>
-                                @if ($pessoa->foto_perfil != null and file_exists(public_path('pfp').DIRECTORY_SEPARATOR.$pessoa->foto_perfil))
-                                        <div id="Preview" class='w-24 h-24 rounded border mr-2 overflow-hidden'>
-                                        <img src="{{ asset('pfp/' . $pessoa->foto_perfil) }}" 
-                                                alt="Foto de Perfil"
-                                                class="object-cover w-full h-full">
-                                    </div>
-                                @else
-                                        <div id="Preview" class='w-24 h-24 rounded border mr-2 overflow-hidden'>
-                                        <img src="{{ asset('img/defaultpfp.png')}}" 
-                                                alt="Foto de Perfil"
-                                                class="object-cover w-full h-full">
-                                    </div>
-                                @endif
+                                <label class="block text-sm font-medium text-gray-700">Nome</label>
+                                <div class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                    {{ $pessoa->nome }}
+                                </div>
                             </div>
 
-                            <div class="w-full ml-2">           
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Nome</label>
-                                    <div class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                        {{ $pessoa->nome }}
-                                    </div>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
-                                    <div class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                        {{ \Carbon\Carbon::parse($pessoa->data_nascimento)->format('d/m/Y') }}
-                                    </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
+                                <div class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                    {{ \Carbon\Carbon::parse($pessoa->data_nascimento)->format('d/m/Y') }}
                                 </div>
                             </div>
                         </div>
+                    </div>
 
 
                     <div class="mb-4">
@@ -86,6 +86,16 @@
                             {{ $pessoa->telefone_contato }}
                         </div>
                     </div>
+
+                    @if ($pessoa->usuario)
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700">Usuário Vinculado</label>
+                        <div class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                            {{ $pessoa->usuario->name }}
+                        </div>
+                    </div>
+                    @endif
+
                 </div>
             </div>
         </div>
