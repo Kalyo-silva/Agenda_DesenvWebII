@@ -1,6 +1,6 @@
-# Agenda_DesenvWebII
+# Acolhe+ Sistema de Gestão de Compromissos como em Casa de Acolhimento
 
-Trabalho Realizado na matéria de Desenvolvimento Web II
+Trabalho de extensão Realizado na matéria de Desenvolvimento Web II
 
 # Instalação
 
